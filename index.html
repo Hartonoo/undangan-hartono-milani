@@ -14,7 +14,10 @@
             --gold-grad: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --accent-gold: #d4af37;
             --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.1);
+            /* Motif Batik Emas Romantis untuk Teks */
+            --batik-pattern-text: url('https://i.ibb.co/sK6V5wD/batik-gold-text.png');
+            /* Motif Batik Emas untuk Overlay Kaca */
+            --batik-pattern-overlay: url('https://i.ibb.co/L5hYp0W/batik-gold-overlay.png');
         }
 
         body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background: #000; color: var(--white); scroll-behavior: smooth; }
@@ -38,16 +41,16 @@
         /* Hero Fullscreen */
         .hero { 
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/images/bg-utama.webp') no-repeat center center fixed;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/bg-utama.webp') no-repeat center center fixed;
             background-size: cover; text-align: center;
         }
 
         .hero h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 10vw, 6rem); margin: 20px 0; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* DRAMATIC PARALLAX GALLERY SECTIONS */
+        /* PARALLAX GALLERY BACKGROUND SECTIONS */
         .parallax-section {
             position: relative;
-            height: 80vh;
+            height: 90vh;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
@@ -63,8 +66,30 @@
             background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.8) 100%);
         }
 
-        /* Content Blocks in Between */
-        .content-block {
+        /* THEMATIC ROMANTIC BATIK OVERLAY BLOCK (Ganti area putih) */
+        .content-block-batik {
+            padding: 120px 20px;
+            position: relative;
+            background-image: var(--batik-pattern-overlay); /* Motif Batik Emas */
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(10px); /* Efek Kaca */
+            border-top: 5px solid var(--accent-gold);
+            border-bottom: 5px solid var(--accent-gold);
+            color: #fff; /* Teks ayat jadi putih */
+            text-align: center;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+        }
+
+        .content-block-batik i.fas.fa-dove {
+            color: #fff; /* Burung Cinta Putih */
+            font-size: 3rem;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+        }
+
+        /* Block Biasa */
+        .content-block-white {
             padding: 100px 20px;
             background: #fff;
             color: #2c3e50;
@@ -74,11 +99,10 @@
         /* Interactive Maps Container */
         .map-container {
             max-width: 1000px; margin: -100px auto 50px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px; border-radius: 30px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px; border-radius: 30px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            border: 2px solid rgba(255,255,255,0.5);
             position: relative; z-index: 10;
         }
 
@@ -90,29 +114,31 @@
         /* Event Cards */
         .events-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; max-width: 1100px; margin: 40px auto;
+            gap: 35px; max-width: 1100px; margin: 40px auto;
         }
 
         .event-card {
-            background: white; padding: 40px; border-radius: 30px;
-            border: 1px solid #eee; transition: 0.5s;
+            background: white; padding: 45px; border-radius: 30px;
+            border: 1px solid #f0f0f0; transition: 0.5s;
         }
 
-        .event-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .event-card:hover { transform: translateY(-12px); box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
 
         .btn-nav {
-            display: inline-block; padding: 15px 40px; margin-top: 25px;
+            display: inline-block; padding: 18px 45px; margin-top: 25px;
             background: var(--primary-grad); color: white; border-radius: 50px;
             text-decoration: none; font-weight: 600; transition: 0.4s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .btn-nav:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .btn-nav:hover { transform: scale(1.05); letter-spacing: 1px; }
 
-        footer { padding: 80px 20px; text-align: center; background: #000; }
+        footer { padding: 80px 20px; text-align: center; background: #000; border-top: 1px solid rgba(255,255,255,0.1); }
 
         @media (max-width: 768px) {
-            .parallax-section { background-attachment: scroll; height: 60vh; }
-            .map-container { margin-top: -50px; }
+            .parallax-section { background-attachment: scroll; height: 70vh; }
+            .content-block-batik { padding: 80px 20px; }
+            .map-container { margin-top: -60px; padding: 15px; }
         }
     </style>
 </head>
@@ -124,40 +150,40 @@
     </div>
 
     <div class="hero">
-        <div data-aos="zoom-in" data-aos-duration="2000">
-            <p style="letter-spacing: 5px;">THE WEDDING OF</p>
+        <div data-aos="zoom-in" data-aos-duration="2500">
+            <p style="letter-spacing: 6px; font-weight: 300;">THE WEDDING OF</p>
             <h1>Hartono & Milani Rosmita</h1>
-            <p style="font-size: 1.2rem; font-weight: 300;">11 . 03 . 2027</p>
+            <p style="font-size: 1.3rem; font-weight: 400;">11 . 03 . 2027</p>
         </div>
     </div>
 
-    <div class="content-block">
-        <div class="container" data-aos="fade-up">
-            <i class="fas fa-heart" style="color: var(--accent-gold); font-size: 2rem; margin-bottom: 20px;"></i>
-            <h2 style="font-family: 'Playfair Display'; font-style: italic; max-width: 800px; margin: 0 auto; line-height: 1.6;">
-                "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."
+    <div class="content-block-batik">
+        <div class="container" data-aos="fade-up" data-aos-duration="1500">
+            <i class="fas fa-dove" title="Burung Cinta Putih Cinta"></i>
+            <h2 style="font-family: 'Playfair Display'; font-style: italic; max-width: 850px; margin: 0 auto; line-height: 1.7; color: #fff;">
+                "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
             </h2>
-            <p style="margin-top: 20px; font-weight: 600; color: var(--accent-gold);">QS. AR-RUM: 21</p>
+            <p style="margin-top: 25px; font-weight: 600; color: #fff; letter-spacing: 3px;">(QS. AR-RUM: 21)</p>
         </div>
     </div>
 
     <div class="parallax-section" style="background-image: url('assets/images/foto-profil.webp');">
         <div data-aos="fade-right" style="text-align: center; z-index: 2;">
-            <h2 style="font-family: 'Dancing Script'; font-size: 4rem; color: var(--accent-gold);">Rangkaian Acara</h2>
-            <p>Saksi Bisu Janji Suci Kami</p>
+            <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 8vw, 5rem); background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Rangkaian Acara</h2>
+            <p style="color: #fff;">Saksi Bisu Janji Suci Kami</p>
         </div>
     </div>
 
-    <div class="content-block">
+    <div class="content-block-white">
         <div class="events-grid">
             <div class="event-card" data-aos="flip-left">
-                <i class="fas fa-ring" style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 20px;"></i>
+                <i class="fas fa-ring" style="font-size: 2.2rem; color: var(--accent-gold); margin-bottom: 25px;"></i>
                 <h3>Akad Nikah</h3>
                 <p>08.00 - 10.00 WIB</p>
                 <p>Kediaman Mempelai Wanita</p>
             </div>
             <div class="event-card" data-aos="flip-right">
-                <i class="fas fa-glass-cheers" style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 20px;"></i>
+                <i class="fas fa-glass-cheers" style="font-size: 2.2rem; color: var(--accent-gold); margin-bottom: 25px;"></i>
                 <h3>Resepsi</h3>
                 <p>11.00 - 14.00 WIB</p>
                 <p>Gedung Pernikahan Harmoni</p>
@@ -167,31 +193,31 @@
 
     <div class="parallax-section" style="background-image: url('assets/images/bg-utama.webp');">
         <div data-aos="fade-up" style="text-align: center; z-index: 2;">
-            <h2 style="font-family: 'Dancing Script'; font-size: 4rem;">Lokasi Acara</h2>
+            <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 8vw, 5rem); color: #fff;">Lokasi Acara</h2>
         </div>
     </div>
 
-    <div class="content-block" style="background: #f8f9fa;">
-        <div class="map-container" data-aos="zoom-in-up">
+    <div class="content-block-white" style="background: #fdfdfd;">
+        <div class="map-container" data-aos="zoom-in-up" data-aos-duration="1500">
             <iframe 
                 class="map-frame"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126915.28187847113!2d106.78918235820312!3d-6.250269399999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3b555555555%3A0x8b3b3b3b3b3b3b3b!2sGedung%20Pernikahan%20Harmoni!5e0!3m2!1sid!2sid!4v1611111111111!5m2!1sid!2sid" 
                 allowfullscreen="" loading="lazy">
             </iframe>
             <a href="https://goo.gl/maps/navigasi-asli" target="_blank" class="btn-nav">
-                <i class="fas fa-directions"></i> Buka Navigasi Google Maps
+                <i class="fas fa-location-arrow"></i> Petunjuk Arah Google Maps
             </a>
         </div>
     </div>
 
     <div class="parallax-section" style="background-image: url('assets/images/foto-profil.webp'); height: 100vh;">
-        <div class="container" style="z-index: 2; text-align: center;">
-            <div data-aos="zoom-out" data-aos-duration="1500">
-                <h2 style="font-family: 'Dancing Script'; font-size: 5rem;">Terima Kasih</h2>
-                <p style="max-width: 600px; margin: 20px auto;">
+        <div class="container" style="z-index: 2; text-align: center; padding: 20px;">
+            <div data-aos="zoom-out" data-aos-duration="2000">
+                <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 10vw, 6rem); color: #fff;">Terima Kasih</h2>
+                <p style="max-width: 650px; margin: 25px auto; color: #fff; line-height: 1.6;">
                     Kehadiran dan doa restu Bapak/Ibu/Saudara/i merupakan kehormatan dan kebahagiaan bagi kami.
                 </p>
-                <h3 style="margin-top: 30px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                <h3 style="margin-top: 40px; font-size: clamp(1.5rem, 4vw, 2.2rem); background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                     Hartono & Milani Rosmita
                 </h3>
             </div>
@@ -199,7 +225,7 @@
     </div>
 
     <footer>
-        <p style="opacity: 0.6; font-size: 0.8rem; letter-spacing: 2px;">DESIGNED BY HARTONO © 2026</p>
+        <p style="opacity: 0.5; font-size: 0.7rem; letter-spacing: 3px;">DESIGNED BY HARTONO © 2026</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
