@@ -14,47 +14,40 @@
             --gold-grad: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --accent-gold: #d4af37;
             --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
         }
 
-        body { 
-            margin: 0; font-family: 'Montserrat', sans-serif; 
-            background: #f8f9fa; overflow-x: hidden; 
-        }
+        body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background: #000; color: var(--white); scroll-behavior: smooth; }
 
-        /* Music Floating Control */
+        /* Musik Control */
         .music-control { 
             position: fixed; bottom: 30px; left: 30px; z-index: 1000; 
-            background: var(--white); width: 55px; height: 55px;
+            background: var(--white); width: 50px; height: 50px;
             display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
-            cursor: pointer; border: 1.5px solid var(--accent-gold);
+            border-radius: 50%; border: 2px solid var(--accent-gold);
+            cursor: pointer; box-shadow: 0 0 20px rgba(212,175,55,0.5);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
-            70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(212,175,55,0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0); }
         }
 
-        /* Hero */
+        /* Hero Fullscreen */
         .hero { 
-            height: 100vh; 
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/bg-utama.webp');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            text-align: center; color: white;
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/images/bg-utama.webp') no-repeat center center fixed;
+            background-size: cover; text-align: center;
         }
 
-        .hero h1 { 
-            font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 10vw, 6rem); 
-            background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
+        .hero h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 10vw, 6rem); margin: 20px 0; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* STRUKTUR GALERI BACKGROUND DRAMATIS (PARALLAX) */
-        .parallax-bg {
+        /* DRAMATIC PARALLAX GALLERY SECTIONS */
+        .parallax-section {
             position: relative;
-            height: 60vh;
+            height: 80vh;
             background-attachment: fixed;
             background-position: center;
             background-repeat: no-repeat;
@@ -62,71 +55,64 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
 
-        /* Overlay Gelap Agar Teks Terbaca */
-        .parallax-bg::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3);
+        .parallax-section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.8) 100%);
         }
 
-        .parallax-content {
-            position: relative;
-            z-index: 1;
-            color: white;
+        /* Content Blocks in Between */
+        .content-block {
+            padding: 100px 20px;
+            background: #fff;
+            color: #2c3e50;
             text-align: center;
-            padding: 0 20px;
         }
 
-        .parallax-content h2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        /* Interactive Maps Container */
+        .map-container {
+            max-width: 1000px; margin: -100px auto 50px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px; border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative; z-index: 10;
         }
 
-        /* Section Biasa di antara Galeri */
-        .content-section {
-            padding: 80px 20px;
-            background: white;
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
+        .map-frame {
+            border-radius: 20px; overflow: hidden;
+            height: 400px; width: 100%; border: none;
         }
 
-        /* Kartu Acara */
-        .events-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px; 
-            margin-top: 50px;
-        }
-        .event-card { 
-            background: #fff; padding: 40px; border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+        /* Event Cards */
+        .events-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; max-width: 1100px; margin: 40px auto;
         }
 
-        /* RSVP Form */
-        .rsvp-container { 
-            max-width: 600px; margin: 40px auto; background: #fff; 
-            padding: 40px; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-        }
-        .btn-premium { 
-            width: 100%; padding: 18px; border: none; border-radius: 12px;
-            background: var(--primary-grad); color: white; font-weight: 600; cursor: pointer;
+        .event-card {
+            background: white; padding: 40px; border-radius: 30px;
+            border: 1px solid #eee; transition: 0.5s;
         }
 
-        footer { background: var(--primary-grad); color: white; padding: 60px 20px; text-align: center; }
+        .event-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
-        /* Khusus Mobile */
+        .btn-nav {
+            display: inline-block; padding: 15px 40px; margin-top: 25px;
+            background: var(--primary-grad); color: white; border-radius: 50px;
+            text-decoration: none; font-weight: 600; transition: 0.4s;
+        }
+
+        .btn-nav:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        footer { padding: 80px 20px; text-align: center; background: #000; }
+
         @media (max-width: 768px) {
-            .parallax-bg { 
-                background-attachment: scroll; /* Mobile scroll fix */
-                height: 40vh; 
-            }
+            .parallax-section { background-attachment: scroll; height: 60vh; }
+            .map-container { margin-top: -50px; }
         }
     </style>
 </head>
@@ -137,40 +123,41 @@
         <i id="musicIcon" class="fas fa-play"></i>
     </div>
 
-    <section class="hero">
-        <div data-aos="zoom-out" data-aos-duration="2000">
-            <p style="letter-spacing: 5px; font-size: 0.9rem;">THE WEDDING OF</p>
+    <div class="hero">
+        <div data-aos="zoom-in" data-aos-duration="2000">
+            <p style="letter-spacing: 5px;">THE WEDDING OF</p>
             <h1>Hartono & Milani Rosmita</h1>
-            <p>11 Maret 2027</p>
+            <p style="font-size: 1.2rem; font-weight: 300;">11 . 03 . 2027</p>
         </div>
-    </section>
+    </div>
 
-    <div class="content-section">
-        <div data-aos="fade-up">
-            <i class="fas fa-heart" style="color: var(--accent-gold); margin-bottom: 20px;"></i>
-            <p style="font-family: 'Playfair Display'; font-style: italic; font-size: 1.4rem;">
+    <div class="content-block">
+        <div class="container" data-aos="fade-up">
+            <i class="fas fa-heart" style="color: var(--accent-gold); font-size: 2rem; margin-bottom: 20px;"></i>
+            <h2 style="font-family: 'Playfair Display'; font-style: italic; max-width: 800px; margin: 0 auto; line-height: 1.6;">
                 "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."
-            </p>
-            <p style="font-weight: 600; color: var(--accent-gold);">QS. AR-RUM: 21</p>
+            </h2>
+            <p style="margin-top: 20px; font-weight: 600; color: var(--accent-gold);">QS. AR-RUM: 21</p>
         </div>
     </div>
 
-    <div class="parallax-bg" style="background-image: url('assets/images/bg-utama.webp');">
-        <div class="parallax-content" data-aos="fade-right">
-            <h2>Our Love Story</h2>
-            <p>Momen tak terlupakan dalam perjalanan kami.</p>
+    <div class="parallax-section" style="background-image: url('assets/images/foto-profil.webp');">
+        <div data-aos="fade-right" style="text-align: center; z-index: 2;">
+            <h2 style="font-family: 'Dancing Script'; font-size: 4rem; color: var(--accent-gold);">Rangkaian Acara</h2>
+            <p>Saksi Bisu Janji Suci Kami</p>
         </div>
     </div>
 
-    <div class="content-section">
-        <h2 data-aos="fade-down" style="font-family: 'Playfair Display'; font-size: 2.5rem;">Rangkaian Acara</h2>
+    <div class="content-block">
         <div class="events-grid">
-            <div class="event-card" data-aos="fade-up">
+            <div class="event-card" data-aos="flip-left">
+                <i class="fas fa-ring" style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 20px;"></i>
                 <h3>Akad Nikah</h3>
                 <p>08.00 - 10.00 WIB</p>
                 <p>Kediaman Mempelai Wanita</p>
             </div>
-            <div class="event-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="event-card" data-aos="flip-right">
+                <i class="fas fa-glass-cheers" style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 20px;"></i>
                 <h3>Resepsi</h3>
                 <p>11.00 - 14.00 WIB</p>
                 <p>Gedung Pernikahan Harmoni</p>
@@ -178,51 +165,59 @@
         </div>
     </div>
 
-    <div class="parallax-bg" style="background-image: url('assets/images/foto-profil.webp');">
-        <div class="parallax-content" data-aos="fade-left">
-            <h2>Beautiful Memories</h2>
-            <p>Terukir indah dalam setiap langkah.</p>
+    <div class="parallax-section" style="background-image: url('assets/images/bg-utama.webp');">
+        <div data-aos="fade-up" style="text-align: center; z-index: 2;">
+            <h2 style="font-family: 'Dancing Script'; font-size: 4rem;">Lokasi Acara</h2>
         </div>
     </div>
 
-    <div class="content-section">
-        <h2 data-aos="fade-up" style="font-family: 'Playfair Display'; font-size: 2.5rem;">Konfirmasi Kehadiran</h2>
-        <div class="rsvp-container" data-aos="zoom-in">
-            <form id="rsvpForm">
-                <input type="text" placeholder="Nama Lengkap" style="width:100%; padding:15px; margin-bottom:15px; border-radius:10px; border:1px solid #ddd;" required>
-                <select style="width:100%; padding:15px; margin-bottom:15px; border-radius:10px; border:1px solid #ddd;">
-                    <option>Hadir</option>
-                    <option>Berhalangan</option>
-                </select>
-                <textarea placeholder="Ucapan & Doa" style="width:100%; padding:15px; margin-bottom:15px; border-radius:10px; border:1px solid #ddd;" rows="4"></textarea>
-                <button type="submit" class="btn-premium">Kirim Ucapan</button>
-            </form>
+    <div class="content-block" style="background: #f8f9fa;">
+        <div class="map-container" data-aos="zoom-in-up">
+            <iframe 
+                class="map-frame"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126915.28187847113!2d106.78918235820312!3d-6.250269399999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3b555555555%3A0x8b3b3b3b3b3b3b3b!2sGedung%20Pernikahan%20Harmoni!5e0!3m2!1sid!2sid!4v1611111111111!5m2!1sid!2sid" 
+                allowfullscreen="" loading="lazy">
+            </iframe>
+            <a href="https://goo.gl/maps/navigasi-asli" target="_blank" class="btn-nav">
+                <i class="fas fa-directions"></i> Buka Navigasi Google Maps
+            </a>
         </div>
     </div>
 
-    <div class="parallax-bg" style="background-image: url('assets/images/bg-utama.webp'); height: 80vh;">
-        <div class="parallax-content" data-aos="zoom-in">
-            <h2>See You on Our Big Day!</h2>
-            <p>Hartono & Milani Rosmita</p>
+    <div class="parallax-section" style="background-image: url('assets/images/foto-profil.webp'); height: 100vh;">
+        <div class="container" style="z-index: 2; text-align: center;">
+            <div data-aos="zoom-out" data-aos-duration="1500">
+                <h2 style="font-family: 'Dancing Script'; font-size: 5rem;">Terima Kasih</h2>
+                <p style="max-width: 600px; margin: 20px auto;">
+                    Kehadiran dan doa restu Bapak/Ibu/Saudara/i merupakan kehormatan dan kebahagiaan bagi kami.
+                </p>
+                <h3 style="margin-top: 30px; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Hartono & Milani Rosmita
+                </h3>
+            </div>
         </div>
     </div>
 
     <footer>
-        <div style="font-family: 'Dancing Script'; font-size: 2.5rem; color: var(--accent-gold);">Hartono & Milani Rosmita</div>
-        <p>© 2026 Created by Hartono</p>
+        <p style="opacity: 0.6; font-size: 0.8rem; letter-spacing: 2px;">DESIGNED BY HARTONO © 2026</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: false }); // once: false agar efek muncul setiap kali scroll up/down
+        AOS.init({ duration: 1200, once: false });
 
         const music = document.getElementById('bgMusic');
         const icon = document.getElementById('musicIcon');
         let isPlaying = false;
 
         function toggleMusic() {
-            if (isPlaying) { music.pause(); icon.classList.replace('fa-pause', 'fa-play'); }
-            else { music.play(); icon.classList.replace('fa-play', 'fa-pause'); }
+            if (isPlaying) { 
+                music.pause(); 
+                icon.classList.replace('fa-pause', 'fa-play');
+            } else { 
+                music.play(); 
+                icon.classList.replace('fa-play', 'fa-pause'); 
+            }
             isPlaying = !isPlaying;
         }
 
