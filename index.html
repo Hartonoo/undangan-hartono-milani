@@ -4,31 +4,173 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan Hartono & Milani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
     <style>
-        .hero {
-            background-image: url('assets/images/bg-utama.webp');
-            background-size: cover;
-            height: 100vh;
+        :root {
+            --primary: #5d7e8a; /* Warna senada background kamu */
+            --text-dark: #2c3e50;
+            --white: #ffffff;
         }
-        .profile-pic {
-            width: 150px;
-            height: 150px;
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            background-color: #f4f7f6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/images/bg-utama.webp');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .profile-container {
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             border: 5px solid white;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .profile-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin: 10px 0;
+        }
+
+        /* Countdown */
+        .countdown-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .time-box {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            padding: 10px 15px;
+            border-radius: 10px;
+            min-width: 60px;
+        }
+
+        .time-box span { display: block; font-size: 1.5rem; font-weight: bold; }
+
+        /* Section Umum */
+        section { padding: 60px 20px; text-align: center; }
+
+        .btn-maps {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-maps:hover { transform: scale(1.05); }
+
+        /* Buku Tamu / RSVP */
+        .rsvp-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="content">
-            <img src="assets/images/foto-profil.webp" class="profile-pic" alt="Hartono & Milani">
-            <h1>Hartono & Milani Rosmita</h1>
-            <p>Kami mengundang Anda...</p>
+    <audio id="bgMusic" src="assets/music/lagu.mpeg" loop></audio>
+
+    <div class="hero">
+        <div class="profile-container" data-aos="zoom-in">
+            <img src="assets/images/foto-profil.webp" alt="Hartono & Milani">
+        </div>
+        <p data-aos="fade-up">The Wedding of</p>
+        <h1 data-aos="fade-up" data-aos-delay="200">Hartono & Milani</h1>
+        <div class="countdown-container" data-aos="fade-up" data-aos-delay="400">
+            <div class="time-box"><span id="days">00</span>Hari</div>
+            <div class="time-box"><span id="hours">00</span>Jam</div>
+            <div class="time-box"><span id="mins">00</span>Menit</div>
+        </div>
+    </div>
+
+    <section data-aos="fade-up">
+        <h2>Lokasi Acara</h2>
+        <p>Gedung Pernikahan Harmoni<br>Jl. Melati No. 123, Jakarta</p>
+        <a href="https://goo.gl/maps/example" target="_blank" class="btn-maps">Buka Google Maps</a>
+    </section>
+
+    <section style="background-color: #ebf1f0;" data-aos="fade-up">
+        <h2>Buku Tamu</h2>
+        <div class="rsvp-form">
+            <form>
+                <input type="text" placeholder="Nama Anda" required>
+                <select>
+                    <option>Konfirmasi Kehadiran</option>
+                    <option>Hadir</option>
+                    <option>Tidak Hadir</option>
+                </select>
+                <textarea placeholder="Ucapan & Doa"></textarea>
+                <button type="button" class="btn-maps" style="border:none; cursor:pointer; width:100%">Kirim Ucapan</button>
+            </form>
         </div>
     </section>
 
-    <audio id="music" src="assets/music/lagu.mpeg" loop></audio>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Countdown Logic (Ganti tanggal pernikahanmu di sini)
+        const weddingDate = new Date("Dec 31, 2026 09:00:00").getTime();
+
+        setInterval(function() {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+
+            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        }, 1000);
+
+        // Auto Play Musik saat interaksi pertama
+        window.addEventListener('click', function() {
+            document.getElementById('bgMusic').play();
+        }, { once: true });
+    </script>
 
 </body>
 </html>
