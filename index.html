@@ -25,7 +25,7 @@
 
         /* Musik Control */
         .music-control { 
-            position: fixed; bottom: 30px; left: 30px; z-index: 1000; 
+            position: fixed; bottom: 30px; left: 30px; z-index: 2000; 
             background: rgba(0,0,0,0.8); width: 50px; height: 50px;
             display: flex; align-items: center; justify-content: center;
             border-radius: 50%; border: 2px solid var(--accent-gold);
@@ -38,31 +38,38 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0); }
         }
 
-        /* Hero Fullscreen */
+        /* Hero Section - Dirapikan agar teks tidak tenggelam */
         .hero { 
             height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('assets/images/bg-utama.webp') no-repeat center center fixed;
-            background-size: cover; text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('assets/images/bg-utama.webp') no-repeat center center fixed;
+            background-size: cover; text-align: center; position: relative; z-index: 1;
         }
         .hero h1 { 
             font-family: 'Dancing Script', cursive; font-size: clamp(3.5rem, 12vw, 7rem); 
-            background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            margin: 10px 0; filter: drop-shadow(2px 2px 10px rgba(0,0,0,0.8));
+            background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            margin: 10px 0; filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.8));
         }
+        .hero p { text-shadow: 2px 2px 10px rgba(0,0,0,1); }
 
-        /* Parallax Layer */
+        /* Parallax Layer - Diberi z-index agar tidak menutupi teks saat scroll */
         .parallax-layer {
             position: relative; height: 100vh; background-attachment: fixed;
             background-position: center; background-repeat: no-repeat; background-size: cover;
+            display: flex; align-items: center; justify-content: center; z-index: 1;
         }
+        .parallax-layer::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 0;
+        }
+        .parallax-layer .content-text { position: relative; z-index: 2; text-align: center; width: 100%; }
 
-        /* Batik Black Gold Section */
+        /* Batik Black Gold Section - Jarak dirapikan */
         .content-block-batik-parallax {
-            padding: 120px 20px; position: relative;
+            padding: 100px 20px; position: relative; z-index: 10;
             background-image: var(--batik-black-gold); background-size: cover;
             background-position: center; background-attachment: fixed;
             color: var(--text-gold); text-align: center;
-            border-top: 5px solid var(--accent-gold); border-bottom: 5px solid var(--accent-gold);
+            border-top: 3px solid var(--accent-gold); border-bottom: 3px solid var(--accent-gold);
             box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
         }
 
@@ -71,35 +78,38 @@
 
         .quote-parallax {
             font-family: 'Playfair Display'; font-style: italic; font-size: clamp(1.1rem, 3vw, 1.5rem);
-            line-height: 1.8; max-width: 800px; margin: 0 auto;
+            line-height: 1.8; max-width: 800px; margin: 0 auto; padding: 0 20px;
             background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         /* Event Cards */
         .events-grid-parallax {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 35px; max-width: 1100px; margin: 40px auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; max-width: 1000px; margin: 40px auto;
         }
         .event-card-parallax {
-            background: rgba(0,0,0,0.9); padding: 45px; border-radius: 40px 0 40px 0;
+            background: rgba(0,0,0,0.85); padding: 40px 20px; border-radius: 40px 0 40px 0;
             border: 2px solid rgba(212,175,55,0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
         }
 
-        /* Maps */
+        /* Maps - Dirapikan agar tidak terpotong */
         .map-container-parallax {
-            max-width: 1000px; margin: -100px auto 50px; background: rgba(0,0,0,0.95);
-            padding: 20px; border-radius: 30px; border: 3px solid rgba(212,175,55,0.4);
-            position: relative; z-index: 10;
+            max-width: 900px; margin: 50px auto; background: rgba(0,0,0,0.95);
+            padding: 15px; border-radius: 30px; border: 2px solid rgba(212,175,55,0.4);
+            position: relative; z-index: 20;
         }
-        .map-frame-parallax { border-radius: 20px; height: 400px; width: 100%; border: none; }
+        .map-frame-parallax { border-radius: 20px; height: 350px; width: 100%; border: none; }
         
         .btn-nav-parallax {
-            display: inline-block; padding: 18px 45px; margin-top: 25px;
-            background: var(--gold-grad); color: #000; border-radius: 50px;
-            text-decoration: none; font-weight: 700;
+            display: inline-block; padding: 15px 40px; margin-top: 20px;
+            background: var(--primary-grad); color: #000; border-radius: 50px;
+            text-decoration: none; font-weight: 700; transition: 0.3s;
         }
+        .btn-nav-parallax:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--accent-gold); }
 
-        footer { padding: 80px 20px; text-align: center; background: #000; }
+        footer { padding: 60px 20px; text-align: center; background: #000; border-top: 1px solid rgba(212,175,55,0.2); }
     </style>
 </head>
 <body>
@@ -110,66 +120,69 @@
     </div>
 
     <div class="hero">
-        <div data-aos="zoom-in" data-aos-duration="2500">
-            <p style="letter-spacing: 6px; font-weight: 300; color: #fff;">THE WEDDING OF</p>
-            <h1>Hartono & Milani</h1> <p style="font-size: 1.5rem; font-weight: 400; color: var(--text-gold); letter-spacing: 3px;">11 . 03 . 2027</p>
+        <div data-aos="fade-up" data-aos-duration="2000">
+            <p style="letter-spacing: 6px; font-weight: 300; color: #fff; margin-bottom: 20px;">THE WEDDING OF</p>
+            <h1>Hartono & Milani Rosmita</h1> 
+            <p style="font-size: 1.5rem; font-weight: 400; color: var(--text-gold); letter-spacing: 4px;">11 . 03 . 2027</p>
         </div>
     </div>
 
     <div class="content-block-batik-parallax">
         <div class="container" data-speed="0.8">
-            <i class="fas fa-dove" style="color:#fff; font-size: 3rem; margin-bottom: 20px;"></i>
+            <i class="fas fa-dove" style="color:#fff; font-size: 2.5rem; margin-bottom: 20px;"></i>
             <h2 class="quote-parallax">
-                "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."
+                "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
             </h2>
-            <p style="margin-top: 25px; font-weight: 600; letter-spacing: 3px;">(QS. AR-RUM: 21)</p>
+            <p style="margin-top: 25px; font-weight: 600; letter-spacing: 3px; color: var(--accent-gold);">(QS. AR-RUM: 21)</p>
         </div>
     </div>
 
     <div class="parallax-layer" style="background-image: url('assets/images/foto-profil.webp');">
-        <div data-aos="fade-right" data-speed="1.2" style="text-align: center; padding-top: 20vh;">
-            <h2 style="font-family: 'Dancing Script'; font-size: 4rem; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Rangkaian Acara</h2>
+        <div class="content-text" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 8vw, 5rem); background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(2px 2px 10px #000);">Rangkaian Acara</h2>
         </div>
     </div>
 
     <div class="content-block-batik-parallax">
         <div class="events-grid-parallax" data-speed="1.1">
-            <div class="event-card-parallax">
-                <i class="fas fa-ring" style="color:var(--accent-gold); font-size: 2rem;"></i>
-                <h3>Akad Nikah</h3>
-                <p>08.00 - 10.00 WIB</p>
-                <p>Kediaman Mempelai Wanita</p>
+            <div class="event-card-parallax" data-aos="zoom-in">
+                <i class="fas fa-ring" style="color:var(--accent-gold); font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Akad Nikah</h3>
+                <p style="margin: 10px 0;">08.00 - 10.00 WIB</p>
+                <p style="font-weight: 300; font-size: 0.9rem;">Kediaman Mempelai Wanita</p>
             </div>
-            <div class="event-card-parallax">
-                <i class="fas fa-glass-cheers" style="color:var(--accent-gold); font-size: 2rem;"></i>
-                <h3>Resepsi</h3>
-                <p>11.00 - 14.00 WIB</p>
-                <p>Gedung Pernikahan Harmoni</p>
+            <div class="event-card-parallax" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-glass-cheers" style="color:var(--accent-gold); font-size: 2.5rem; margin-bottom: 15px;"></i>
+                <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem;">Resepsi</h3>
+                <p style="margin: 10px 0;">11.00 - 14.00 WIB</p>
+                <p style="font-weight: 300; font-size: 0.9rem;">Gedung Pernikahan Harmoni</p>
             </div>
         </div>
     </div>
 
     <div class="parallax-layer" style="background-image: url('assets/images/bg-utama.webp');">
-        <div data-aos="fade-up" data-speed="1.3" style="text-align: center; padding-top: 20vh;">
-            <h2 style="font-family: 'Dancing Script'; font-size: 4rem; color: #fff;">Lokasi Acara</h2>
+        <div class="content-text" data-aos="fade-up">
+            <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 8vw, 5rem); color: #fff; text-shadow: 2px 4px 15px #000;">Lokasi Acara</h2>
         </div>
     </div>
 
-    <div class="content-block-batik-parallax" style="padding-top: 0;">
-        <div class="map-container-parallax" data-speed="0.9">
-            <iframe class="map-frame-parallax" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.05!2d106.85!3d-6.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTUnMDAuMCJTIDEwNsKwNTEnMDAuMCJF!5e0!3m2!1sid!2sid!4v123456789" allowfullscreen="" loading="lazy"></iframe>
-            <a href="#" class="btn-nav-parallax">Buka Google Maps</a>
+    <div class="content-block-batik-parallax" style="padding: 60px 20px;">
+        <div class="map-container-parallax" data-speed="0.95">
+            <iframe class="map-frame-parallax" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15865.23438183141!2d106.824964!3d-6.175392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTAnMzEuNCJTIDEwNsKwNDknMjkuOSJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+            <a href="https://maps.google.com" target="_blank" class="btn-nav-parallax">
+                <i class="fas fa-map-marker-alt"></i> Petunjuk Lokasi
+            </a>
         </div>
     </div>
 
     <footer>
-        <h2 style="font-family: 'Dancing Script'; font-size: 3rem;">Hartono & Milani</h2>
-        <p style="opacity: 0.4; font-size: 0.7rem; letter-spacing: 3px; margin-top: 20px;">DESIGNED BY HARTONO © 2026</p>
+        <h2 style="font-family: 'Dancing Script'; font-size: 2.5rem; margin-bottom: 10px;">Hartono & Milani Rosmita</h2>
+        <p style="opacity: 0.6; font-size: 0.7rem; letter-spacing: 3px;">DESIGNED BY HARTONO © 2027</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200 });
+        AOS.init({ duration: 1000, once: true });
 
         const music = document.getElementById('bgMusic');
         const icon = document.getElementById('musicIcon');
@@ -181,11 +194,13 @@
             isPlaying = !isPlaying;
         }
 
+        // Efek Parallax Teks
         window.addEventListener('scroll', () => {
+            const scrollPos = window.pageYOffset;
             if (window.innerWidth > 768) {
                 document.querySelectorAll('[data-speed]').forEach(layer => {
                     const speed = layer.getAttribute('data-speed');
-                    const y = -window.pageYOffset * (speed - 1);
+                    const y = -scrollPos * (speed - 1);
                     layer.style.transform = `translateY(${y}px)`;
                 });
             }
