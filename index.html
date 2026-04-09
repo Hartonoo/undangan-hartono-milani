@@ -33,8 +33,10 @@
             display: flex; align-items: center; justify-content: center;
             border-radius: 50%; border: 2px solid var(--accent-gold);
             cursor: pointer; box-shadow: 0 0 20px rgba(212,175,55,0.6);
-            animation: pulse 2s infinite;
+            animation: pulse 2s infinite; transition: 0.3s;
         }
+        .music-control:hover { transform: scale(1.1); }
+
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0.7); }
             70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(212,175,55,0); }
@@ -57,17 +59,11 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        /* PERBAIKAN: Menampilkan Background penuh agar terlihat sempurna di mobile */
         .content-block-batik {
             background-image: var(--batik-black-gold); 
-            background-size: cover;
-            background-position: center; 
-            /* Perubahan: Mengubah 'fixed' menjadi 'scroll' agar background tampil sempurna di mobile */
-            background-attachment: scroll; 
-            border-top: 5px solid var(--accent-gold); 
-            border-bottom: 5px solid var(--accent-gold);
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
-            z-index: 1; /* Memberikan layer z-index agar teks tetap di atas */
+            background-size: cover; background-position: center; background-attachment: scroll; 
+            border-top: 5px solid var(--accent-gold); border-bottom: 5px solid var(--accent-gold);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.9); z-index: 1;
         }
 
         [data-speed] { will-change: transform; transition: transform 0.1s linear; z-index: 2; }
@@ -84,7 +80,7 @@
             margin-bottom: 50px;
         }
 
-        /* Mempelai */
+        /* 1. Interaktif: Mempelai */
         .couple-section { padding: 80px 20px; background: var(--bg-black); position: relative; z-index: 1; }
         .couple-wrap {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -93,15 +89,22 @@
         .couple-card {
             text-align: center; background: var(--glass-card); padding: 35px;
             border-radius: 25px; border: 1px solid var(--glass-border);
+            transition: all 0.5s ease;
+        }
+        .couple-card:hover {
+            transform: translateY(-15px); background: rgba(212, 175, 55, 0.05);
+            border-color: var(--accent-gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
         }
         .couple-img-frame {
             width: 180px; height: 180px; border-radius: 50%;
             margin: 0 auto 25px; overflow: hidden; border: 4px solid var(--accent-gold);
+            transition: transform 0.5s ease;
         }
+        .couple-card:hover .couple-img-frame { transform: scale(1.05) rotate(3deg); }
         .couple-img-frame img { width: 100%; height: 100%; object-fit: cover; }
         .couple-name { font-family: 'Dancing Script', cursive; font-size: 2.8rem; color: var(--accent-gold); }
 
-        /* Acara */
+        /* 2. Interaktif: Rangkaian Acara */
         .events-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 35px; max-width: 1100px; margin: 20px auto; width: 100%;
@@ -109,54 +112,65 @@
         .event-card {
             background: rgba(0,0,0,0.9); padding: 45px; border-radius: 40px 0 40px 0;
             border: 2px solid rgba(212,175,55,0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-            text-align: center;
+            text-align: center; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .event-card i { font-size: 2.2rem; color: var(--accent-gold); margin-bottom: 25px; }
+        .event-card:hover { transform: scale(1.03); border-color: var(--accent-gold); background: #0a0a0a; }
+        .event-card i { font-size: 2.2rem; color: var(--accent-gold); margin-bottom: 25px; transition: 0.3s; }
+        .event-card:hover i { transform: bounce; animation: iconBounce 1s infinite; }
+        @keyframes iconBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* Gallery */
+        /* 3. Interaktif: Galeri */
         .gallery-section { padding: 80px 20px; background: #000; position: relative; z-index: 1; }
         .gallery-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 15px; max-width: 1200px; margin: 0 auto;
         }
-        .gallery-item { border-radius: 12px; overflow: hidden; border: 3px solid #fff; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item { 
+            border-radius: 12px; overflow: hidden; border: 3px solid #fff; 
+            cursor: pointer; position: relative; transition: 0.4s;
+        }
+        .gallery-item::after {
+            content: '\f00e'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+            color: white; font-size: 2rem; transition: 0.3s; z-index: 2;
+        }
+        .gallery-item:hover { filter: brightness(0.8); transform: scale(0.98); }
+        .gallery-item:hover::after { transform: translate(-50%, -50%) scale(1); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 
-        /* Maps */
+        /* 4. Interaktif: Lokasi & Tombol */
         .map-container {
             max-width: 1000px; width: 100%; margin: 20px auto; background: rgba(0,0,0,0.95);
             padding: 20px; border-radius: 30px; border: 3px solid rgba(212,175,55,0.4);
+            transition: 0.3s;
         }
+        .map-container:hover { border-color: var(--accent-gold); box-shadow: 0 0 30px rgba(212,175,55,0.2); }
         .map-frame { border-radius: 20px; height: 350px; width: 100%; border: none; }
         .btn-nav {
             display: inline-block; padding: 15px 40px; margin-top: 20px;
             background: var(--gold-grad); color: #000; border-radius: 50px;
-            text-decoration: none; font-weight: 700;
+            text-decoration: none; font-weight: 700; transition: 0.3s;
         }
+        .btn-nav:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(212,175,55,0.4); letter-spacing: 1px; }
 
         /* RSVP */
-        .rsvp-section { 
-            padding: 100px 20px; 
-            background-image: var(--batik-black-gold); 
-            background-size: cover; 
-            background-position: center;
-            /* Perubahan: Mengubah 'fixed' menjadi 'scroll' agar background tampil sempurna di mobile */
-            background-attachment: scroll; 
-            position: relative; 
-            z-index: 1; 
-        }
+        .rsvp-section { padding: 100px 20px; background-image: var(--batik-black-gold); background-size: cover; background-position: center; background-attachment: scroll; position: relative; z-index: 1; }
         .rsvp-container {
             max-width: 600px; margin: 0 auto; background: rgba(0,0,0,0.9);
             padding: 40px; border-radius: 25px; border: 1px solid var(--glass-border);
         }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%; padding: 15px; background: transparent; border: 1px solid var(--glass-border);
-            border-radius: 10px; color: var(--text-gold); margin-bottom: 15px; box-sizing: border-box;
+            border-radius: 10px; color: var(--text-gold); margin-bottom: 15px; box-sizing: border-box; transition: 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--accent-gold); outline: none; background: rgba(212,175,55,0.05);
         }
         .btn-submit {
             width: 100%; background: var(--gold-grad); color: #000; border: none; padding: 15px;
-            border-radius: 10px; font-weight: 700; cursor: pointer;
+            border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s;
         }
+        .btn-submit:hover { transform: scale(1.02); filter: brightness(1.1); }
 
         footer { padding: 60px 20px; text-align: center; background: #000; border-top: 1px solid var(--glass-border); position: relative; z-index: 1; }
 
