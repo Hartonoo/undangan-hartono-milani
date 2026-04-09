@@ -12,6 +12,8 @@
         :root {
             --bg-black: #050505;
             --primary-grad: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 100%);
+            /* Baris perbaikan agar nama Hartono & Milani muncul */
+            --gold-grad: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 100%); 
             --accent-gold: #d4af37;
             --text-gold: #fcf6ba;
             --white: #ffffff;
@@ -109,10 +111,6 @@
             background: var(--gold-grad); color: #000; border-radius: 50px;
             text-decoration: none; font-weight: 700;
         }
-
-        /* ==============================
-           TAMBAHAN KOMPONEN BARU DI BAWAH
-           ============================== */
 
         /* 1. Section Title Universal */
         .section-title {
@@ -212,7 +210,7 @@
     <div class="hero">
         <div data-aos="zoom-in" data-aos-duration="2500">
             <p style="letter-spacing: 6px; font-weight: 300; color: #fff;">THE WEDDING OF</p>
-            <h1>Hartono & Milani</h1> 
+            <h1>Hartono & Milani Rosmita</h1> 
             <p style="font-size: 1.3rem; font-weight: 400; color: var(--text-gold); letter-spacing: 3px;">11 . 03 . 2027</p>
         </div>
     </div>
@@ -381,7 +379,6 @@
             if (!isPlaying) { music.play(); icon.classList.replace('fa-play', 'fa-pause'); isPlaying = true; }
         }, { once: true });
 
-        /* SCRIPT PARALLAX INTERAKTIF (Diperhalus untuk PC) */
         const layers = document.querySelectorAll('[data-speed]');
         window.addEventListener('scroll', () => {
             if (window.innerWidth > 768) { 
@@ -393,7 +390,6 @@
             }
         });
 
-        // RSVP Form Simple Alert (Nanti bisa dihubungkan ke database/sheet)
         document.getElementById('rsvpFormV2').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('rsvp_name').value;
