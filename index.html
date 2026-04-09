@@ -12,7 +12,6 @@
         :root {
             --bg-black: #050505;
             --primary-grad: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 100%);
-            /* Baris perbaikan agar nama Hartono & Milani muncul */
             --gold-grad: linear-gradient(135deg, #bf953f 0%, #fcf6ba 45%, #b38728 70%, #fbf5b7 100%); 
             --accent-gold: #d4af37;
             --text-gold: #fcf6ba;
@@ -66,7 +65,7 @@
             background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3));
         }
 
-        /* Batik Black Gold Section (Ganti area putih) */
+        /* Batik Black Gold Section (Perbaikan Jarak Global agar Rapi) */
         .content-block-batik-parallax {
             padding: 120px 20px; position: relative;
             background-image: var(--batik-black-gold); background-size: cover;
@@ -74,6 +73,14 @@
             color: var(--text-gold); text-align: center;
             border-top: 5px solid var(--accent-gold); border-bottom: 5px solid var(--accent-gold);
             box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+            overflow: hidden; /* Mencegah elemen parallax keluar jalur */
+        }
+
+        /* Perbaikan Spesifik Jarak Ayat agar Tidak Tabrakan */
+        .content-block-batik-parallax .container[data-speed="0.8"] {
+            margin-bottom: 200px; /* Memberikan ruang ekstra di bawah ayat agar tidak tertabrak 'Rangkaian Acara' */
+            position: relative;
+            z-index: 5;
         }
 
         /* Floating Text Effect */
@@ -85,10 +92,28 @@
             background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
+        /* Perbaikan Spesifik Kontainer Rangkaian Acara agar Rapi di Layer Atas */
+        .content-block-batik-parallax div[data-speed="1.1"] {
+            margin-top: 100px; /* Jarak dari kontainer ayat sebelumnya */
+            margin-bottom: 100px;
+            position: relative;
+            z-index: 10; /* Berada di atas layer foto parallax */
+        }
+
+        /* Perbaikan Spesifik Judul 'Rangkaian Acara' agar Selalu Tampil Rapi di Atas */
+        .section-header-parallax {
+            text-align: center; 
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 20; /* Layer paling tinggi di blok ini agar tidak tertutup */
+        }
+
         /* Event Cards Grid */
         .events-grid-parallax {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 35px; max-width: 1100px; margin: 40px auto;
+            position: relative;
+            z-index: 10; /* Di atas layer foto parallax */
         }
         .event-card-parallax {
             background: rgba(0,0,0,0.9); padding: 45px; border-radius: 40px 0 40px 0;
@@ -98,9 +123,15 @@
         .event-card-parallax:hover { transform: translateY(-10px); border-color: var(--accent-gold); }
         .event-card-parallax i { font-size: 2.2rem; color: var(--accent-gold); margin-bottom: 25px; }
 
-        /* Maps */
+        /* Maps (Juga diperbaiki agar rapi) */
+        .content-block-batik-parallax div[data-speed="0.9"] {
+            margin-top: 150px;
+            position: relative;
+            z-index: 10;
+        }
+
         .map-container-parallax {
-            max-width: 1000px; margin: -100px auto 50px; background: rgba(0,0,0,0.95);
+            max-width: 1000px; margin: 0 auto 50px; background: rgba(0,0,0,0.95);
             padding: 20px; border-radius: 30px; border: 3px solid rgba(212,175,55,0.4);
             position: relative; z-index: 10;
         }
@@ -111,6 +142,10 @@
             background: var(--gold-grad); color: #000; border-radius: 50px;
             text-decoration: none; font-weight: 700;
         }
+
+        /* ==============================
+           TAMBAHAN KOMPONEN BARU DI BAWAH
+           ============================== */
 
         /* 1. Section Title Universal */
         .section-title {
@@ -210,12 +245,13 @@
     <div class="hero">
         <div data-aos="zoom-in" data-aos-duration="2500">
             <p style="letter-spacing: 6px; font-weight: 300; color: #fff;">THE WEDDING OF</p>
-            <h1>Hartono & Milani Rosmita</h1> 
+            <h1>Hartono & Milani</h1> 
             <p style="font-size: 1.3rem; font-weight: 400; color: var(--text-gold); letter-spacing: 3px;">11 . 03 . 2027</p>
         </div>
     </div>
 
     <div class="content-block-batik-parallax">
+        
         <div class="container" data-speed="0.8">
             <i class="fas fa-dove" style="color:#fff; font-size: 3rem; margin-bottom: 20px;"></i>
             <h2 class="quote-parallax">
@@ -223,52 +259,55 @@
             </h2>
             <p style="margin-top: 25px; font-weight: 600; color: var(--text-gold); letter-spacing: 3px;">(QS. AR-RUM: 21)</p>
         </div>
-    </div>
 
-    <div class="parallax-layer" style="background-image: url('assets/images/foto-profil.webp');">
-        <div data-aos="fade-right" data-speed="1.2" style="text-align: center; z-index: 2; color: #fff;">
-            <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 8vw, 5rem); background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Rangkaian Acara</h2>
-            <p style="color: #fff;">Saksi Bisu Janji Suci Kami</p>
+        <div class="parallax-layer" style="background-image: url('assets/images/foto-profil.webp'); margin-top: -150px; margin-bottom: -150px; z-index: 1;">
+            <div data-speed="1.2" style="position: absolute; width: 100%; height: 100%; z-index: 1;"></div>
         </div>
-    </div>
 
-    <div class="content-block-batik-parallax" style="background-attachment: scroll; border: none; box-shadow: none;">
-        <div class="events-grid-parallax" data-speed="1.1">
-            <div class="event-card-parallax" data-aos="flip-left">
-                <i class="fas fa-ring"></i>
-                <h3>Akad Nikah</h3>
-                <p>08.00 - 10.00 WIB</p>
-                <p style="font-weight: 300;">Kediaman Mempelai Wanita</p>
+        <div data-speed="1.1">
+            <div class="section-header-parallax">
+                <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 8vw, 5rem); background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Rangkaian Acara</h2>
+                <p style="color: #fff;">Saksi Bisu Janji Suci Kami</p>
             </div>
-            <div class="event-card-parallax" data-aos="flip-right">
-                <i class="fas fa-glass-cheers"></i>
-                <h3>Resepsi</h3>
-                <p>11.00 - 14.00 WIB</p>
-                <p style="font-weight: 300;">Gedung Pernikahan Harmoni</p>
+            
+            <div class="events-grid-parallax">
+                <div class="event-card-parallax" data-aos="flip-left">
+                    <i class="fas fa-ring"></i>
+                    <h3>Akad Nikah</h3>
+                    <p>08.00 - 10.00 WIB</p>
+                    <p style="font-weight: 300;">Kediaman Mempelai Wanita</p>
+                </div>
+                <div class="event-card-parallax" data-aos="flip-right">
+                    <i class="fas fa-glass-cheers"></i>
+                    <h3>Resepsi</h3>
+                    <p>11.00 - 14.00 WIB</p>
+                    <p style="font-weight: 300;">Gedung Pernikahan Harmoni</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="parallax-layer" style="background-image: url('assets/images/bg-utama.webp');">
-        <div data-aos="fade-up" data-speed="1.3" style="text-align: center; z-index: 2; color: #fff;">
-            <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 8vw, 5rem); color: #fff;">Lokasi Acara</h2>
+        <div class="parallax-layer" style="background-image: url('assets/images/bg-utama.webp'); margin-top: -150px; margin-bottom: -150px; z-index: 1;">
+            <div data-speed="1.3" style="position: absolute; width: 100%; height: 100%; z-index: 1;"></div>
         </div>
-    </div>
 
-    <div class="content-block-batik-parallax" style="background: #000; border: none; padding-top: 50px;">
-        <div class="map-container-parallax" data-aos="zoom-in-up" data-speed="0.9">
-            <iframe 
-                class="map-frame-parallax"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126915.28187847113!2d106.78918235820312!3d-6.250269399999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3b555555555%3A0x8b3b3b3b3b3b3b3b!2sGedung%20Pernikahan%20Harmoni!5e0!3m2!1sid!2sid!4v1611111111111!5m2!1sid!2sid" 
-                allowfullscreen="" loading="lazy">
-            </iframe>
-            <a href="https://goo.gl/maps/navigasi-asli" target="_blank" class="btn-nav-parallax">
-                <i class="fas fa-directions"></i> Buka Google Maps
-            </a>
+        <div data-speed="0.9">
+            <div class="section-header-parallax" style="margin-bottom: 0; padding-top: 100px;">
+                <h2 style="font-family: 'Dancing Script'; font-size: clamp(3rem, 8vw, 5rem); color: #fff;">Lokasi Acara</h2>
+            </div>
+            
+            <div class="map-container-parallax" data-aos="zoom-in-up">
+                <iframe 
+                    class="map-frame-parallax"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126915.28187847113!2d106.78918235820312!3d-6.250269399999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3b555555555%3A0x8b3b3b3b3b3b3b3b!2sGedung%20Pernikahan%20Harmoni!5e0!3m2!1sid!2sid!4v1611111111111!5m2!1sid!2sid" 
+                    allowfullscreen="" loading="lazy">
+                </iframe>
+                <a href="https://goo.gl/maps/navigasi-asli" target="_blank" class="btn-nav-parallax">
+                    <i class="fas fa-directions"></i> Buka Google Maps
+                </a>
+            </div>
         </div>
-    </div>
 
-    <section class="couple-section">
+    </div> <section class="couple-section">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Mempelai Pria & Wanita</h2>
             <div class="couple-wrap">
@@ -379,6 +418,7 @@
             if (!isPlaying) { music.play(); icon.classList.replace('fa-play', 'fa-pause'); isPlaying = true; }
         }, { once: true });
 
+        /* SCRIPT PARALLAX INTERAKTIF (Diperhalus untuk PC) */
         const layers = document.querySelectorAll('[data-speed]');
         window.addEventListener('scroll', () => {
             if (window.innerWidth > 768) { 
@@ -390,6 +430,7 @@
             }
         });
 
+        // RSVP Form Simple Alert (Nanti bisa dihubungkan ke database/sheet)
         document.getElementById('rsvpFormV2').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('rsvp_name').value;
