@@ -57,18 +57,17 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        /* PERBAIKAN: Menampilkan Background agar terlihat sempurna di semua perangkat */
+        /* PERBAIKAN: Menampilkan Background penuh agar terlihat sempurna di mobile */
         .content-block-batik {
-            position: relative;
             background-image: var(--batik-black-gold); 
             background-size: cover;
             background-position: center; 
-            /* Perubahan di bawah untuk memperbaiki tampilan mobile */
-            background-attachment: scroll; /* Mengatasi masalah rendering di mobile */
+            /* Perubahan: Mengubah 'fixed' menjadi 'scroll' agar background tampil sempurna di mobile */
+            background-attachment: scroll; 
             border-top: 5px solid var(--accent-gold); 
             border-bottom: 5px solid var(--accent-gold);
             box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
-            z-index: 1; /* Memberikan layer z-index dasar agar background tampil */
+            z-index: 1; /* Memberikan layer z-index agar teks tetap di atas */
         }
 
         [data-speed] { will-change: transform; transition: transform 0.1s linear; z-index: 2; }
@@ -136,7 +135,16 @@
         }
 
         /* RSVP */
-        .rsvp-section { padding: 100px 20px; background-image: var(--batik-black-gold); background-size: cover; background-attachment: fixed; position: relative; z-index: 1; }
+        .rsvp-section { 
+            padding: 100px 20px; 
+            background-image: var(--batik-black-gold); 
+            background-size: cover; 
+            background-position: center;
+            /* Perubahan: Mengubah 'fixed' menjadi 'scroll' agar background tampil sempurna di mobile */
+            background-attachment: scroll; 
+            position: relative; 
+            z-index: 1; 
+        }
         .rsvp-container {
             max-width: 600px; margin: 0 auto; background: rgba(0,0,0,0.9);
             padding: 40px; border-radius: 25px; border: 1px solid var(--glass-border);
